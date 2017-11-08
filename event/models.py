@@ -3,16 +3,21 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 
+from datetime import datetime
 # Create your models here.
 
 city_choices = [('DURHAM', 'Durham'), ('RALEIGH', 'Raleigh')]
 
+# now = datetime.strptime(str(timezone.now), "%H:%M")
 
 class EventManager(models.Model):
     title = models.CharField(max_length=300)
     slug = models.SlugField(max_length=140, unique=True, blank=True, null=True)
     description = models.TextField()
     # Images =
+    # music_category = models.CharField(max_length=500)
+    # music_sample =
+    # dj_name = models.CharField(max_length=500)
     event_start_time = models.TimeField(default=timezone.now)
     event_end_time = models.TimeField(default=timezone.now)
     event_date = models.DateField(default=timezone.now)

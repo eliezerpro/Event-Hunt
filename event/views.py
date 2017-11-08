@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
+from django.http import Http404
 from .models import EventManager, EventLocation
 from django.db.models import Q
+from.forms import EventManagerForm, EventLocationForm
 
 
 # Create your views here.
@@ -36,6 +38,45 @@ def event_detail(request, event_slug):
     context = {'event': event, 'address': address}
     return render(request, 'event/detail.html', context)
 
+
+def event_create(request):
+    if not request.user.is_active or not request.user.is_authenticated:
+        return redirect("events_app:error")
+    form1 = EventManagerForm(request.POST or None)
+    form2 = EventLocationForm(request.POST or None)
+
+    if form1.is_valid() and form2.is_valid():
+        instance1 = form1.save(commit=False)
+        instance2 = form2.save(commit=False)
+        instance1.save()
+        instance2.title_id = instance1.id
+        instance2.save()
+        return HttpResponseRedirect(instance1.get_absolute_url())
+
+    context = {"form1": form1, "form2": form2}
+    return render(request, 'event/event_form.html', context)
+
+def event_update(request, event_slug):
+    if not request.user.is_active or not request.user.is_authenticated:
+        return redirect("events_app:error")
+    main_instance = get_object_or_404(EventManager, slug=event_slug)
+    location_instances = get_object_or_404(EventLocation, title_id= main_instance.id)
+    form1 = EventManagerForm(request.POST or None, instance=main_instance)
+    form2 = EventLocationForm(request.POST or None, instance=location_instances)
+
+    if form1.is_valid() and form2.is_valid():
+        instance1 = form1.save(commit=False)
+        instance2 = form2.save(commit=False)
+        instance1.save()
+        instance2.title_id = instance1.id
+        instance2.save()
+        return HttpResponseRedirect(instance1.get_absolute_url())
+
+    context = {"form1": form1, "form2": form2}
+    return render(request, 'event/event_form.html', context)
+
+def event_delete(request):
+    pass
 
 def error(request):
     return render(request, 'event/error.html', context={})
