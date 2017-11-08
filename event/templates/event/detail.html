@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+{{ event.title }}<br><br>
+{{event.event_start_time}}<br><br>
+{{event.event_end_time}}<br><br>
+{{event.event_date}}<br><br>
+{{event.post_date }}<br><br>
+{{ event.description }}<br><br><br>
+{% for address in address %}
+{{ address.address }}<br><br>
+{{ address.states }}<br><br>
+{{ address.city }}<br><br>
+{{ address.zip_code }}<br><br>
+{% endfor %}
+
+</body>
+</html>

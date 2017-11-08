@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+    {% for event in latest_events %}
+        <a href='{{ event.get_absolute_url }}'>{{ event.title }}</a><br><br><br><br>
+        {{ event.description }}<br><br><br><br>
+    {% endfor %}
+
+<form action=""> {% csrf_token %}
+
+    <input name="q" type="text">
+    <input type="submit" value="Search">
+
+</form>
+</body>
+</html>
