@@ -45,7 +45,8 @@ class EventManager(models.Model):
 
 
 class EventLocation(models.Model):
-    title = models.ForeignKey(EventManager, on_delete=models.CASCADE)
+    title = models.OneToOneField(EventManager, on_delete=models.CASCADE)
+    venue = models.CharField(max_length=550, null=True, blank=True)
     address = models.CharField(max_length=300)
     zip_code = models.CharField(max_length=10)
     states = models.CharField(default="North Carolina", max_length=20, editable=False)

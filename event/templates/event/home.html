@@ -1,12 +1,26 @@
 {% extends 'event/base.html' %}
 {% load staticfiles %}
 
-{% block recent-events %}
-    {% for event in latest_events %}
-        <div class="col-lg-6 recent-12-div">
 
-            <h2 class="recent-12-title">{{ event.title | truncatechars:20 }} </h2>
-            <img class="recent-12" src="{% static 'img/hardwell.jpg'%}" alt="Generic placeholder image" width="550" height="auto">
+{% block heroText %}
+        <div class="container hero-text">
+            <h1 class='ad-statement'><span class="beats"><img src="{% static 'img/beats.png' %}"></span> Best place to find <br>music events near you </h1>
+                <a class='explore_link' href="#">&#128269; let's Explore</a>
+        </div>
+{% endblock %}
+
+
+
+{% block recent-events %}
+<h1>List of Top 5 Events this Month <span><p style="font-size: 0.5em">(Explore more events in Events tab)</p></span></h1>
+    {% for event in latest_events %}
+        <div class="col-lg-12 recent-12-div">
+
+            <h2 class="recent-12-title">{{ event.title }} </h2>  <!-- |truncatechars:20 -->
+            {% for location in event.eventlocation_set.all %}
+                <p style="text-align: left">{{ location.city }}, {{ location.states }}, {{ location.zip_code }}</p>
+            {% endfor %}
+            <img class="recent-12" src="{% static 'img/hardwell.jpg'%}" alt="Generic placeholder image" width="100%" height="auto">
             <p class="recent-12-text"><a class="explore_link" href="{{ event.get_absolute_url }}" role="button">View Event&raquo;</a></p>
           </div><!-- /.col-lg-4 -->
     {% endfor %}
@@ -15,5 +29,43 @@
 
 {% endblock %}
 
+{% block features %}
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+        {% endblock %}
 
 <!--<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>-->

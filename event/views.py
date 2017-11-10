@@ -4,11 +4,13 @@ from .models import EventManager, EventLocation
 from django.db.models import Q
 from.forms import EventManagerForm, EventLocationForm
 
+import datetime
 
 # Create your views here.
 
 def home(request):
-    latest_events = EventManager.objects.order_by('-event_date')[:10]
+
+    latest_events = EventManager.objects.filter(event_date__gte=datetime.datetime.today())  #order_by('-event_date')[:5]
     context = {'latest_events': latest_events}
     return render(request, 'event/home.html', context)
 
@@ -16,6 +18,7 @@ def home(request):
 def event_list(request):
     events = EventLocation.objects.all()[::-1]
     query = request.GET.get("q")
+    text = ''
     if query:
         events = EventLocation.objects.all()
         events = events.filter(
@@ -26,7 +29,11 @@ def event_list(request):
             Q(title__title__icontains=query)|
             Q(title__description__icontains=query)
         ).distinct()[::-1]
-    context = {"event_list": events}
+
+        if not events:
+            text = "Oops! No results found. Try again!"
+
+    context = {"event_list": events, 'text': text}
     return render(request, "event/list.html", context)
 
 
@@ -34,7 +41,7 @@ def event_detail(request, event_slug):
     if not request.user.is_active or not request.user.is_authenticated:
         return redirect("events_app:error")
     event = get_object_or_404(EventManager, slug=event_slug)
-    address = event.eventlocation_set.all()
+    address = EventLocation.objects.get(title_id=event.id)
     context = {'event': event, 'address': address}
     return render(request, 'event/detail.html', context)
 

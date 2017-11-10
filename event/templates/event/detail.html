@@ -1,22 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail</title>
-</head>
-<body>
-{{ event.title }}<br><br>
-{{event.event_start_time}}<br><br>
-{{event.event_end_time}}<br><br>
-{{event.event_date}}<br><br>
-{{event.post_date }}<br><br>
-{{ event.description }}<br><br><br>
-{% for address in address %}
-{{ address.address }}<br><br>
-{{ address.states }}<br><br>
-{{ address.city }}<br><br>
-{{ address.zip_code }}<br><br>
-{% endfor %}
+{% extends 'event/base.html' %}
+{% load staticfiles %}
 
-</body>
-</html>
+{% block style %}
+
+.myHeader1 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.40) ), url({% static 'img/detroit.jpg' %});
+    height: 70vh;
+    top: 0;
+}
+
+.myHeader1 .event-title {
+    position: absolute;
+    display: block;
+    float: right;
+    bottom: 40%;
+    right: 10%;
+    border: 1px solid #ddd;
+
+}
+
+
+.ad-statement {
+    font-size: 1.3em;
+    color: #ddd;
+    padding: 5%;
+    margin-bottom: 0;
+}
+
+.posted {
+    position: relative;
+    display: block;
+    font-size: 1em;
+}
+
+.event-detail h4{
+    line-height: 2.5px;
+}
+
+{% endblock %}
+
+
+{% block heroText %}
+        <div class="event-title">
+            <h3 class='ad-statement'>
+                Event Date: {{event.event_date}}<br><br>
+                Timings: {{event.event_start_time}} to {{event.event_end_time}}
+            </h3>
+        </div>
+{% endblock %}
+
+
+{% block event-detail %}
+<h1>{{ event.title }}</h1>
+<p class="posted">Posted on: {{event.post_date }}</p>
+
+<h5>{{ address.venue }},<br>
+{{ address.address }},<br>
+{{ address.states }}, {{ address.city }}, {{ address.zip_code }}</h5><br><br>
+{{ event.description }}<br><br><br>
+
+<h5>Some images from previous events: </h5>
+
+<h5> Dj's Sample Music: </h5>
+{% endblock %}
+
+

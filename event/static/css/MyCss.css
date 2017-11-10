@@ -7,7 +7,7 @@ body {
     /*background-color:#ff5999;*/
 /*}*/
 
-header {
+.myHeader {
     background-image: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.40) ), url(../img/hardwell.jpg);
     background-size: cover;
     background-position: center;
@@ -17,7 +17,7 @@ header {
 
 .navbar {
     background-color: #16181b;
-    font-size: 1.2em;
+    font-size: 1em;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 400;
@@ -101,14 +101,61 @@ header {
 
 .recent-12-div {
     text-align: center;
+    /*border: 2px solid black;*/
+}
+
+.recent-12-div:before{
+    content: "";
+    display: block;
+    width: 100%;
+    background-color: #e1e1e1;
+    height: 1px;
+}
+
+.recent-12-title{
+    margin-top: 30px;
+    text-align: left;
 }
 
 .recent-12 {
     /*padding: 2%;*/
     margin-bottom: 50px;
+    margin-top: 20px;
     box-shadow: 5px 5px 15px black;
 }
 
 .recent-12-text{
     margin-bottom: 80px;
+}
+
+.test {
+    height: 35px;
+    padding: 1%;
+}
+
+.test:focus {
+    border: 1px solid #5193ff;
+    box-shadow: 2px 2px 5px #5193ff;
+}
+
+.all-events {
+    display: block;
+    float: left;
+    /*border: 1px solid #ddd;*/
+    padding: 2%;
+    box-shadow: 2px 2px 5px #ddd;
+}
+
+.mybtn,
+.mybtn:focus{
+    color: rgb(250, 50, 127);
+    border-color: rgb(250, 50, 127);
+    transition: color 1.5s, background-color 1.5s;
+}
+
+.mybtn:hover,
+.mybtn:active{
+    color: #fff;
+    background-color: rgb(250, 50, 127);
+    border-color: rgb(250, 50, 127);
 }

@@ -17,16 +17,23 @@
     <link href="{% static 'css/carousel.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link href="{% static 'css/MyCss.css' %}" rel="stylesheet">
+    <style>
+
+      {% block style %}
+
+      {% endblock %}
+
+    </style>
   </head>
   <body>
 
-    <header>
+    <header class="myHeader myHeader1">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <a class="navbar-brand" href="#"><img  class="mylogo" src="{% static 'img/new_logo.png' %}"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse nav-pad container" id="navbarCollapse">
+        <div class="collapse navbar-collapse  container" id="navbarCollapse">
           <ul class="navbar-nav mr-auto ">
             <li class="nav-item">
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -44,16 +51,18 @@
               <a class="nav-link" href="#">Feedback</a>
             </li>
           </ul>
-          <!--<form class="form-inline mt-2 mt-md-0">-->
-            <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
-            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-          <!--</form>-->
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0 mybtn" type="submit">Search</button>
+          </form>
         </div>
       </nav>
-        <div class="container hero-text">
-            <h1 class='ad-statement'><span class="beats"><img src="{% static 'img/beats.png' %}"></span> Best place to find <br>music events near you </h1>
-                <a class='explore_link' href="#">&#128269; let's Explore</a>
-        </div>
+
+      {% block heroText %}
+
+      {% endblock %}
+
 
     </header>
 
@@ -70,9 +79,17 @@
       ================================================== -->
       <!-- Wrap the rest of the page in another container to center all the content. -->
 
+      <div class="container event-detail">
+
+          {% block event-detail %}
+
+
+          {% endblock %}
+        </div>
+
       <div class="container marketing">
 
-        <h1>List of Top 12 Events this Month</h1>
+
         <!--<form class="form-inline mt-2 mt-md-0">-->
             <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
             <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
@@ -91,42 +108,9 @@
 
         <hr class="featurette-divider">
 
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-          </div>
-        </div>
+        {% block features %}
 
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-          </div>
-          <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
+        {% endblock %}
         <!-- /END THE FEATURETTES -->
 
       </div><!-- /.container -->
